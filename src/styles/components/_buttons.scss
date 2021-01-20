@@ -1,0 +1,23 @@
+.btn {
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 7px;
+  font-weight: bold;
+  background: transparent;
+  padding: 12px 20px 12px 20px;
+  font-size: 13px;
+  color: #fff;
+  transition: all 0.3s ease;
+
+  svg {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+}
+
+.btn-green {
+  background-color: $main-green;
+
+  &:hover {
+  }
+}

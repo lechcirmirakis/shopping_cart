@@ -1,0 +1,14 @@
+.footer {
+  background-color: $light-green;
+  padding: 10px;
+
+  .footer-box {
+    display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+    .total-price{
+      color: #fff;
+    }
+  }
+}

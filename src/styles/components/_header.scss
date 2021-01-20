@@ -1,0 +1,19 @@
+.header {
+  padding: 10px 0;
+  background-color: $main-green;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  flex-flow: column;
+
+  .title {
+    color: #fff;
+    font-size: 16px;
+    margin: 10px 0 5px;
+  }
+
+  .main-logo {
+    height: 40px;
+    fill: #fff;
+  }
+}

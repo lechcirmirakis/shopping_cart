@@ -40,7 +40,7 @@ const App = () => {
 
   return (
     <Layout>
-      <div className="container">
+      <div className="app">
         <h3>Lista produktów</h3>
         <ul>
           {state.products.map((product) => {
