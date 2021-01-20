@@ -1,7 +1,11 @@
-import React from 'react';
-import './App.scss';
+import React from "react";
+import "./App.scss";
+
+import { dispatchToState, getState } from "context";
 
 const App = () => {
+  const state = getState();
+  console.log(state.products);
 
   return (
     <div className="container">
@@ -13,6 +17,4 @@ const App = () => {
   );
 };
 
-export {
-    App
-};
+export { App };
