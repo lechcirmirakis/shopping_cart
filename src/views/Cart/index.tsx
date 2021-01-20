@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
-import "./global.scss";
+import "styles/global.scss";
 
 import Layout from "components/Layout";
+import CartItem from "components/CartItem";
 
 import { dispatchToState, getState } from "context";
 import { Product } from "common/types";
 
-const App = () => {
-  const state = getState();
+const Cart = () => {
   const dispatch = dispatchToState();
+  const state = getState();
 
   useEffect(() => {
     fetchProducts();
@@ -38,31 +39,23 @@ const App = () => {
     console.log(pid);
   };
 
+  const functions = {
+    quantityAddHandler,
+    quantityRemoveHandler,
+  };
+
   return (
     <Layout>
-      <div className="app">
-        <h3>Lista produktów</h3>
-        <ul>
-          {state.products.map((product) => {
-            return (
-              <li className="row" key={product.pid}>
-                <div>
-                  <div>
-                    {product.name}, cena: {product.price.replace(".", ",")} zł
-                  </div>
-                  <div>
-                    <a onClick={() => quantityRemoveHandler(product.pid)}>-</a>
-                    <div>Obecnie masz {product.quantity} sztuk produktu</div>
-                    <a onClick={() => quantityAddHandler(product.pid)}>+</a>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
+      <div className="cart-wrapper ">
+        <h3 className="cart-title">Lista Produktów</h3>
+        <ul className="cart-list">
+          {state.products.map((item) => (
+            <CartItem key={item.pid} {...item} {...functions} />
+          ))}
         </ul>
       </div>
     </Layout>
   );
 };
 
-export { App };
+export default Cart;

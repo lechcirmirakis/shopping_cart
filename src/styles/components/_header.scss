@@ -1,4 +1,7 @@
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   padding: 10px 0;
   background-color: $main-green;
   display: flex;
@@ -9,7 +12,7 @@
   .title {
     color: #fff;
     font-size: 16px;
-    margin: 10px 0 5px;
+    margin: 5px 0;
   }
 
   .main-logo {

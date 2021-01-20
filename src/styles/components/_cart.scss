@@ -1,0 +1,14 @@
+.cart-wrapper {
+  min-height: calc(100vh - 163px);
+  margin: 93px 0;
+
+  .cart-title {
+    text-align: center;
+    font-size: 20px;
+    padding: 12px 0;
+  }
+
+  .cart-list {
+    padding: 0 10px;
+  }
+}

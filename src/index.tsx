@@ -1,14 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
 
+import Cart from "views/Cart";
 import Context from "context";
 
-import { App } from "./App";
-
-const app = (
+const App = (
   <Context>
-    <App />
+    <Cart />
   </Context>
 );
 
-render(app, document.getElementById("root"));
+render(App, document.getElementById("root"));
