@@ -1,0 +1,24 @@
+@import "styles/common";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  padding: 0 10px;
+  margin: 0 auto;
+
+  @include medium {
+    max-width: 574px;
+  }
+
+  @include mediumLarge {
+    max-width: 768px;
+  }
+}
