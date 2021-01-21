@@ -1,14 +1,12 @@
 import React from "react";
+
+import { formatPrice } from "utils";
 import { Product } from "common/types";
 
 interface CartItemProps extends Product {
   quantityAddHandler: (pid: string) => void;
   quantityRemoveHandler: (pid: string) => void;
 }
-
-const formatPrice = (price: string): string => {
-  return price.replace(".", ",");
-};
 
 const CartItem = ({
   name,
@@ -21,8 +19,6 @@ const CartItem = ({
 }: CartItemProps) => {
   const unitPrice = formatPrice(price);
   const fullPrice = (Number(price) * quantity).toString();
-
-  console.log(isBlocked);
 
   return (
     <li className="cart-item">
