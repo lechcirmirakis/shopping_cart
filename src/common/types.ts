@@ -5,6 +5,7 @@ export type Product = {
   pid: string;
   price: string;
   quantity: number;
+  isBlocked?: boolean;
 };
 
 export interface CartState {

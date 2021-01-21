@@ -15,11 +15,14 @@ const CartItem = ({
   price,
   quantity,
   pid,
+  isBlocked,
   quantityAddHandler,
   quantityRemoveHandler,
 }: CartItemProps) => {
   const unitPrice = formatPrice(price);
   const fullPrice = (Number(price) * quantity).toString();
+
+  console.log(isBlocked);
 
   return (
     <li className="cart-item">
@@ -32,16 +35,21 @@ const CartItem = ({
         <span className="item-price">{formatPrice(fullPrice)} zł</span>
       </div>
       <div className="cart-action">
-        <a className="item-action add" onClick={() => quantityAddHandler(pid)}>
+        <button
+          className="item-action add"
+          onClick={() => quantityAddHandler(pid)}
+          disabled={isBlocked}
+        >
           +
-        </a>
+        </button>
         <div className="item-quantity">1</div>
-        <a
+        <button
           className="item-action remove"
           onClick={() => quantityRemoveHandler(pid)}
+          disabled={isBlocked}
         >
           -
-        </a>
+        </button>
       </div>
     </li>
   );
