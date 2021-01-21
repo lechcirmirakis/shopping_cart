@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback } from "react";
+import { debounce } from "lodash";
 import Loader from "react-loader-spinner";
 import "styles/global.scss";
 
@@ -15,9 +16,6 @@ const Cart = () => {
 
   useEffect(() => {
     fetchProducts();
-    // return () => {
-    //   cleanup
-    // }
   }, []);
 
   const fetchProducts = async () => {
@@ -39,17 +37,44 @@ const Cart = () => {
     }
   };
 
-  const showProducts = (product: Product) => {
-    const { pid } = product;
+  const checkQuantity = useCallback(
+    debounce(async function (pid: string) {
+      try {
+        const res = await fetch("/api/product/check", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            pid: pid,
+            quantity: 5,
+          }),
+        });
 
-    return <CartItem key={pid} {...product} {...functions} />;
-  };
+        console.log(pid);
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }, 1500),
+    []
+  );
+
+  const showProducts = (product: Product) => (
+    <CartItem key={product.pid} {...product} {...functions} />
+  );
 
   const quantityAddHandler = (pid: string) => {
+    dispatch({ type: "productIncrement", payload: pid });
+    checkQuantity(pid);
     console.log(pid);
   };
 
   const quantityRemoveHandler = (pid: string) => {
+    dispatch({ type: "productDecrement", payload: pid });
+    checkQuantity(pid);
     console.log(pid);
   };
 

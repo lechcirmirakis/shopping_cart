@@ -11,9 +11,23 @@ export const reducer = (
   draft: Draft<CartState>,
   { type, payload, field }: Reducer
 ) => {
+  console.log(type, payload, field);
+
   switch (type) {
     case "handleState": {
       draft[field] = payload;
+      return;
+    }
+
+    case "productIncrement": {
+      draft.products[draft.products.findIndex((x) => x.pid === payload)]
+        .quantity++;
+      return;
+    }
+
+    case "productDecrement": {
+      draft.products[draft.products.findIndex((x) => x.pid === payload)]
+        .quantity--;
       return;
     }
 

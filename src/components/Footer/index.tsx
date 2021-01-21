@@ -10,7 +10,7 @@ const Footer = () => {
 
   const totalPrice = (elements: Product[]): string => {
     const total = elements
-      .map((e) => Number(e.price))
+      .map((e) => Number(e.price) * e.quantity)
       .reduce((a, b) => a + b, 0);
 
     const totalRound = Math.round(total * 100) / 100;
