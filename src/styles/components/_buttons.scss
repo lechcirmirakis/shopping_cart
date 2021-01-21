@@ -1,6 +1,7 @@
 .btn {
   text-transform: uppercase;
   text-decoration: none;
+  border: none;
   border-radius: 7px;
   font-weight: bold;
   background: transparent;
@@ -8,16 +9,26 @@
   font-size: 13px;
   color: #fff;
   transition: all 0.3s ease;
+  cursor: pointer;
 
   svg {
     margin-right: 10px;
     font-size: 13px;
+  }
+
+  &:disabled,
+  &[disabled] {
+    background-color: #cccccc;
+    color: #666666;
   }
 }
 
 .btn-green {
   background-color: $main-green;
 
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
+    opacity: 0.8;
   }
 }

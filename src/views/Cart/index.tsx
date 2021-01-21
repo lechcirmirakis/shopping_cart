@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Loader from "react-loader-spinner";
 import "styles/global.scss";
 
 import Layout from "components/Layout";
@@ -10,6 +11,7 @@ import { Product } from "common/types";
 const Cart = () => {
   const dispatch = dispatchToState();
   const state = getState();
+  const { isLoading, products } = state;
 
   useEffect(() => {
     fetchProducts();
@@ -19,6 +21,8 @@ const Cart = () => {
   }, []);
 
   const fetchProducts = async () => {
+    dispatch({ type: "handleState", payload: true, field: "isLoading" });
+
     try {
       const res = await fetch("/api/cart");
       const products = await res.json();
@@ -28,7 +32,17 @@ const Cart = () => {
       });
 
       dispatch({ type: "handleState", payload: products, field: "products" });
-    } catch (error) {}
+      dispatch({ type: "handleState", payload: false, field: "isLoading" });
+    } catch (error) {
+      console.log("error");
+      dispatch({ type: "handleState", payload: false, field: "isLoading" });
+    }
+  };
+
+  const showProducts = (product: Product) => {
+    const { pid } = product;
+
+    return <CartItem key={pid} {...product} {...functions} />;
   };
 
   const quantityAddHandler = (pid: string) => {
@@ -48,10 +62,12 @@ const Cart = () => {
     <Layout>
       <div className="cart-wrapper ">
         <h3 className="cart-title">Lista Produktów</h3>
-        <ul className="cart-list">
-          {state.products.map((item) => (
-            <CartItem key={item.pid} {...item} {...functions} />
-          ))}
+        <ul className={`cart-list${isLoading ? " cart-list__loading" : ""}`}>
+          {!isLoading ? (
+            products.map(showProducts)
+          ) : (
+            <Loader type="ThreeDots" color="#27ae61" height={80} width={80} />
+          )}
         </ul>
       </div>
     </Layout>

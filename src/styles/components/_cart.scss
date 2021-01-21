@@ -10,5 +10,11 @@
 
   .cart-list {
     padding: 0 10px;
+    height: 100%;
+  }
+
+  .cart-list__loading {
+    margin-top: 150px;
+    text-align: center;
   }
 }
