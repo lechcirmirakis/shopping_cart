@@ -6,6 +6,10 @@ interface CartItemProps extends Product {
   quantityRemoveHandler: (pid: string) => void;
 }
 
+const formatPrice = (price: string): string => {
+  return price.replace(".", ",");
+};
+
 const CartItem = ({
   name,
   price,
@@ -14,6 +18,9 @@ const CartItem = ({
   quantityAddHandler,
   quantityRemoveHandler,
 }: CartItemProps) => {
+  const unitPrice = formatPrice(price);
+  const fullPrice = (Number(price) * quantity).toString();
+
   return (
     <li className="cart-item">
       <div className="item-img">
@@ -21,8 +28,8 @@ const CartItem = ({
       </div>
       <div className="item-content">
         <p className="item-name">{name}</p>
-        <span className="item-unitPrice">{price} zł/szt</span>
-        <span className="item-price">{price + quantity} zł</span>
+        <span className="item-unitPrice">{unitPrice} zł / szt</span>
+        <span className="item-price">{formatPrice(fullPrice)} zł</span>
       </div>
       <div className="cart-action">
         <a className="item-action add" onClick={() => quantityAddHandler(pid)}>
