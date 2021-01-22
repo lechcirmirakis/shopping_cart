@@ -38,7 +38,9 @@ const CartItem = ({
       <div className="cart-action">
         <button
           className="item-action add"
-          onClick={() => quantityAddHandler(pid)}
+          onClick={() =>
+            quantityAddHandler(isBlocked || quantity === max ? null : pid)
+          }
           disabled={isBlocked || quantity === max}
         >
           +
@@ -46,7 +48,9 @@ const CartItem = ({
         <div className="item-quantity">{quantity}</div>
         <button
           className="item-action remove"
-          onClick={() => quantityRemoveHandler(pid)}
+          onClick={() =>
+            quantityRemoveHandler(isBlocked || quantity === min ? null : pid)
+          }
           disabled={isBlocked || quantity === min}
         >
           -

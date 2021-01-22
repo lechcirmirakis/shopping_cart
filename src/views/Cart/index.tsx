@@ -54,7 +54,6 @@ const Cart = () => {
         });
 
         const data = await res.json();
-
       } catch (error) {
         console.log(error);
       }
@@ -67,6 +66,7 @@ const Cart = () => {
   );
 
   const quantityAddHandler = (pid: string) => {
+    if (pid === null) return;
     dispatch({ type: "productIncrement", payload: pid });
 
     const currentQuantity: number =
@@ -76,6 +76,7 @@ const Cart = () => {
   };
 
   const quantityRemoveHandler = (pid: string) => {
+    if (pid === null) return;
     dispatch({ type: "productDecrement", payload: pid });
 
     const currentQuantity: number =
