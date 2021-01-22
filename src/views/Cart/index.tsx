@@ -1,15 +1,15 @@
 import React, { useEffect, useCallback } from "react";
-import { debounce } from "lodash";
 import Loader from "react-loader-spinner";
-import "styles/global.scss";
+import { debounce } from "lodash";
 
 import Layout from "components/Layout";
 import CartItem from "components/CartItem";
 
-import { dispatchToState, getState } from "context";
-import { Product, errorTypes } from "common/types";
-
 import { getProductIndex } from "utils";
+import { Product, errorTypes } from "common/types";
+import { dispatchToState, getState } from "context";
+
+import "styles/global.scss";
 
 const Cart = () => {
   const dispatch = dispatchToState();
@@ -34,8 +34,7 @@ const Cart = () => {
       dispatch({ type: "handleState", payload: products, field: "products" });
       dispatch({ type: "handleState", payload: false, field: "isLoading" });
     } catch (error) {
-      console.log("error");
-
+      console.log(error);
       dispatch({ type: "handleState", payload: false, field: "isLoading" });
     }
   };

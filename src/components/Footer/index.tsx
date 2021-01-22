@@ -1,8 +1,8 @@
 import React from "react";
-import { getState } from "context";
-import { Product } from "common/types";
 
 import { formatPrice } from "utils";
+import { Product } from "common/types";
+import { getState } from "context";
 
 const Footer = () => {
   const state = getState();

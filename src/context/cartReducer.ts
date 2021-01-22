@@ -1,7 +1,7 @@
 import { Draft } from "immer";
-import { CartState } from "common/types";
 
 import { getProductIndex } from "utils";
+import { CartState } from "common/types";
 
 export type Reducer = {
   type: string;
