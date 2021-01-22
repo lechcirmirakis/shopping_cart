@@ -9,6 +9,8 @@ import CartItem from "components/CartItem";
 import { dispatchToState, getState } from "context";
 import { Product } from "common/types";
 
+import { getProductIndex } from "utils";
+
 const Cart = () => {
   const dispatch = dispatchToState();
   const state = getState();
@@ -38,7 +40,7 @@ const Cart = () => {
   };
 
   const checkQuantity = useCallback(
-    debounce(async function (pid: string) {
+    debounce(async function (currentQuantity: number, pid: string) {
       try {
         const res = await fetch("/api/product/check", {
           method: "POST",
@@ -47,14 +49,12 @@ const Cart = () => {
           },
           body: JSON.stringify({
             pid: pid,
-            quantity: 5,
+            quantity: currentQuantity,
           }),
         });
 
-        console.log(pid);
-        console.log(res);
         const data = await res.json();
-        console.log(data);
+
       } catch (error) {
         console.log(error);
       }
@@ -68,14 +68,20 @@ const Cart = () => {
 
   const quantityAddHandler = (pid: string) => {
     dispatch({ type: "productIncrement", payload: pid });
-    checkQuantity(pid);
-    console.log(pid);
+
+    const currentQuantity: number =
+      state.products[getProductIndex(state.products, pid)].quantity + 1;
+
+    checkQuantity(currentQuantity, pid);
   };
 
   const quantityRemoveHandler = (pid: string) => {
     dispatch({ type: "productDecrement", payload: pid });
-    checkQuantity(pid);
-    console.log(pid);
+
+    const currentQuantity: number =
+      state.products[getProductIndex(state.products, pid)].quantity - 1;
+
+    checkQuantity(currentQuantity, pid);
   };
 
   const functions = {
