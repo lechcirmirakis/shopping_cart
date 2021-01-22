@@ -49,9 +49,9 @@ const CartItem = ({
         <button
           className="item-action remove"
           onClick={() =>
-            quantityRemoveHandler(isBlocked || quantity === min ? null : pid)
+            quantityRemoveHandler(isBlocked || quantity <= min ? null : pid)
           }
-          disabled={isBlocked || quantity === min}
+          disabled={isBlocked || quantity <= min}
         >
           -
         </button>

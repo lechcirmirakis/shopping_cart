@@ -10,6 +10,7 @@ export interface IProps {
 const initialState: CartState = {
   products: [],
   isLoading: false,
+  error: {},
 };
 
 const StateContext = createContext<CartState | null>(null);

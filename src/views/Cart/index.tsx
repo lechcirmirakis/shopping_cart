@@ -7,7 +7,7 @@ import Layout from "components/Layout";
 import CartItem from "components/CartItem";
 
 import { dispatchToState, getState } from "context";
-import { Product } from "common/types";
+import { Product, errorTypes } from "common/types";
 
 import { getProductIndex } from "utils";
 
@@ -35,6 +35,7 @@ const Cart = () => {
       dispatch({ type: "handleState", payload: false, field: "isLoading" });
     } catch (error) {
       console.log("error");
+
       dispatch({ type: "handleState", payload: false, field: "isLoading" });
     }
   };
@@ -54,6 +55,10 @@ const Cart = () => {
         });
 
         const data = await res.json();
+
+        if (data.isError && data.errorType === errorTypes.INCORRECT_QUANTITY) {
+          dispatch({ type: "resetQuantity", payload: pid });
+        }
       } catch (error) {
         console.log(error);
       }

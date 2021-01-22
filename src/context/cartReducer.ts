@@ -29,6 +29,11 @@ export const reducer = (
       return;
     }
 
+    case "resetQuantity": {
+      draft.products[getProductIndex(draft.products, payload)].quantity = 0;
+      return;
+    }
+
     default:
       return;
   }
